@@ -13,6 +13,8 @@ const statsRoutes = require('./routes/stats');
 const authRoutes = require('./routes/auth');
 const newsletterRoutes = require('./routes/newsletter');
 const blogRoutes = require('./routes/blogs');
+const uploadRoutes = require('./routes/uploads');
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -64,6 +66,8 @@ app.use('/api/stats', statsRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/blogs', blogRoutes);
+app.use('/api/upload', uploadRoutes);
+
 
 // 404 handler
 app.use((req, res) => {

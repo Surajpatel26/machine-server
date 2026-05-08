@@ -95,16 +95,19 @@ router.post('/', authMiddleware, async (req, res) => {
 router.put('/:id', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, short_description, description, specifications, features, is_featured, is_active } = req.body;
+    const { name, short_description, description, specifications, features, is_featured, is_active, main_image, images } = req.body;
     const result = await pool.query(`
-      UPDATE products SET name=$1, short_description=$2, description=$3, specifications=$4, features=$5, is_featured=$6, is_active=$7, updated_at=NOW()
-      WHERE id=$8 RETURNING *
-    `, [name, short_description, description, JSON.stringify(specifications || {}), features || [], is_featured, is_active, id]);
+      UPDATE products 
+      SET name=$1, short_description=$2, description=$3, specifications=$4, features=$5, is_featured=$6, is_active=$7, main_image=$8, images=$9, updated_at=NOW()
+      WHERE id=$10 RETURNING *
+    `, [name, short_description, description, JSON.stringify(specifications || {}), features || [], is_featured, is_active, main_image, images || [], id]);
     res.json(result.rows[0]);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Failed to update product' });
   }
 });
+
 
 // DELETE product
 router.delete('/:id', authMiddleware, async (req, res) => {

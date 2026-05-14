@@ -48,6 +48,8 @@ const seed = async () => {
           'Control System': 'Fanuc 0i-MF',
         }),
         features: ['High rigidity Meehanite cast iron structure', 'Full enclosure with coolant system', 'Auto tool changer (24 tools)', 'Servo driven axes with ball screws', 'Fanuc CNC controller'],
+        main_image: '/uploads/machine3.png',
+        images: ['/uploads/machine3.png'],
         is_featured: true,
       },
       {
@@ -67,6 +69,8 @@ const seed = async () => {
           'Control System': 'Siemens 828D',
         }),
         features: ['Extra-wide linear guideways', 'Precision ground ball screws', 'Heavy duty spindle motor', 'Chip conveyor system', 'Central lubrication system'],
+        main_image: '/uploads/machine4.png',
+        images: ['/uploads/machine4.png'],
         is_featured: true,
       },
       {
@@ -85,6 +89,8 @@ const seed = async () => {
           'Tool Turret': '12 Station',
         }),
         features: ['High-speed hydraulic chuck', '12-station servo turret', 'Built-in spindle motor', 'Automatic lubrication', 'Chip conveyor'],
+        main_image: '/uploads/machine5.png',
+        images: ['/uploads/machine5.png'],
         is_featured: true,
       },
       {
@@ -103,39 +109,49 @@ const seed = async () => {
           'Tool Turret': '12 Station VDI',
         }),
         features: ['Heavy duty spindle bearings', 'VDI tool turret', 'Programmable tailstock', 'Oil cooled spindle', 'Full enclosure'],
+        main_image: '/uploads/machine6.png',
+        images: ['/uploads/machine6.png'],
         is_featured: false,
       },
       {
         category_slug: 'special-purpose-machines',
-        name: 'Multi-Spindle Drilling Unit',
-        slug: 'multi-spindle-drilling-unit',
-        short_description: 'Custom multi-spindle drilling machine for simultaneous hole drilling operations.',
-        description: 'Our Multi-Spindle Drilling Unit is custom-engineered to drill multiple holes simultaneously, dramatically reducing cycle time in mass production environments. Fully configurable for any pattern.',
+        name: 'Dispersion Kneader Mixer',
+        slug: 'dispersion-kneader-mixer',
+        short_description: 'Heavy-duty rubber dispersion kneader for high-volume compound mixing with PLC control.',
+        description: 'The SMG Dispersion Kneader Mixer is engineered for intensive rubber and polymer compound mixing. Its twin-rotor design provides superior dispersion with minimal heat generation, ideal for tyre, seal, and gasket manufacturers. Features hydraulic ram pressure control and full PLC automation.',
         specifications: JSON.stringify({
-          'No. of Spindles': 'Upto 24',
-          'Drilling Capacity': 'Upto 25mm',
-          'Table Size': 'Custom',
-          'Feed': 'Hydraulic / Pneumatic',
-          'Control': 'PLC Based',
+          'Working Capacity': '35 Litres',
+          'Fill Factor': '0.65–0.70',
+          'Rotor Speed': '20–40 RPM',
+          'Ram Pressure': 'Upto 6 kg/cm²',
+          'Motor Power': '55 kW',
+          'Control System': 'PLC + HMI',
+          'Cooling': 'Water-cooled rotors & body',
         }),
-        features: ['Simultaneous multi-hole drilling', 'Custom fixture design', 'PLC automation', 'Quick changeover tooling', 'Integrated chip collection'],
+        features: ['Twin tangential rotors for intensive mixing', 'Hydraulic ram pressure control', 'PLC + HMI touchscreen automation', 'Water-cooled rotors and chamber body', 'Quick-release drop door for batch discharge', 'Temperature monitoring sensors'],
+        main_image: '/uploads/machine1.jpeg',
+        images: ['/uploads/machine1.jpeg'],
         is_featured: true,
       },
       {
         category_slug: 'special-purpose-machines',
-        name: 'Transfer Line Machine',
-        slug: 'transfer-line-machine',
-        short_description: 'Automated transfer line for high-volume sequential machining operations.',
-        description: 'Transfer line machines automate the flow of workpieces through multiple machining stations, ideal for high-volume automotive and engine component production with consistent quality.',
+        name: 'Internal Rubber Mixer – Heavy Duty',
+        slug: 'internal-rubber-mixer-heavy-duty',
+        short_description: 'Large capacity internal mixer for rubber and polymer compounding in industrial production.',
+        description: 'The SMG Heavy-Duty Internal Rubber Mixer delivers consistent, uniform compound quality at scale. Designed for continuous production environments, it features an advanced interlocking rotor geometry and robust Meehanite cast body for long service life.',
         specifications: JSON.stringify({
-          'Stations': 'Upto 20 stations',
-          'Transfer Type': 'Rotary / Linear',
-          'Cycle Time': 'As per requirement',
-          'Automation': 'Full PLC / SCADA',
-          'Integration': 'Robot loading / unloading',
+          'Working Capacity': '75 Litres',
+          'Fill Factor': '0.68',
+          'Rotor Speed': '15–30 RPM',
+          'Ram Pressure': 'Upto 8 kg/cm²',
+          'Motor Power': '110 kW',
+          'Control System': 'SCADA + PLC',
+          'Discharge': 'Hydraulic drop door',
         }),
-        features: ['Sequential multi-station machining', 'Automated transfer mechanism', 'In-process gauging', 'Robot integration ready', 'SCADA monitoring'],
-        is_featured: false,
+        features: ['Large-capacity 75L mixing chamber', 'Interlocking rotor geometry', 'SCADA-integrated production monitoring', 'Automatic ingredient dosing ready', 'Heavy-duty Meehanite cast iron body', 'CE certified safety guarding'],
+        main_image: '/uploads/machine2.jpeg',
+        images: ['/uploads/machine2.jpeg'],
+        is_featured: true,
       },
       {
         category_slug: 'grinding-machines',
@@ -152,6 +168,8 @@ const seed = async () => {
           'Vertical Feed': '0.005 mm per click',
         }),
         features: ['Electromagnetic chuck', 'Fine downfeed mechanism', 'Hydraulic table traverse', 'Wheel balancing stand included', 'Coolant system'],
+        main_image: '/uploads/machine7.png',
+        images: ['/uploads/machine7.png'],
         is_featured: false,
       },
       {
@@ -171,6 +189,8 @@ const seed = async () => {
           'Control System': 'Fanuc 31iB',
         }),
         features: ['Dual pallet changer', '4-sided machining in one setup', '60-tool magazine', 'Coolant through spindle', 'Chip conveyor'],
+        main_image: '/uploads/machine8.png',
+        images: ['/uploads/machine8.png'],
         is_featured: true,
       },
     ];
@@ -178,10 +198,12 @@ const seed = async () => {
     for (const prod of products) {
       const catId = catMap[prod.category_slug];
       await client.query(`
-        INSERT INTO products (category_id, name, slug, short_description, description, specifications, features, is_featured)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-        ON CONFLICT (slug) DO NOTHING
-      `, [catId, prod.name, prod.slug, prod.short_description, prod.description, prod.specifications, prod.features, prod.is_featured]);
+        INSERT INTO products (category_id, name, slug, short_description, description, specifications, features, main_image, images, is_featured)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+        ON CONFLICT (slug) DO UPDATE SET
+          main_image = EXCLUDED.main_image,
+          images = EXCLUDED.images
+      `, [catId, prod.name, prod.slug, prod.short_description, prod.description, prod.specifications, prod.features, prod.main_image || null, prod.images || [], prod.is_featured]);
     }
 
     // Seed testimonials
